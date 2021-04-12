@@ -1,0 +1,43 @@
+GET http://localhost:5000/api/Products HTTP/1.1
+
+###
+
+@baseUrl = http://localhost:5000
+
+###
+
+GET {{baseUrl}}/api/Products HTTP/1.1
+
+###
+
+# @name createProductRequest
+POST {{baseUrl}}/api/Products HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Nazwa produktu",
+    "description": "Opis"
+}
+
+###
+
+@productId = {{createProductRequest.response.body.id}}
+
+###
+
+GET {{baseUrl}}/api/Products/{{productId}} HTTP/1.1
+
+###
+
+PUT {{baseUrl}}/api/Products/{{productId}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "{{productId}}",
+    "name": "nowa nazwa",
+    "description": "Opis"
+}
+
+###
+
+DELETE {{baseUrl}}/api/Products/{{productId}} HTTP/1.1
